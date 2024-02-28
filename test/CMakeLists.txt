@@ -60,6 +60,10 @@ set(COMMON_TEST_FILES
     "mock/mocked_components"
     )
 
+set(BENCHMARK_TEST_FILES
+    "benchmarks/scaling_bench"
+    )
+
 set(NON_NATIVE_TESTS_FILES
     "algebra/fields/plonk/non_native/multiplication"
     "algebra/fields/plonk/non_native/addition"
@@ -204,6 +208,7 @@ SET(ALGEBRA_TESTS_FILES
 
 SET(ALL_TESTS_FILES
     ${COMMON_TEST_FILES}
+    ${BENCHMARK_TEST_FILES}
     ${NON_NATIVE_TESTS_FILES}
     ${PLONK_TESTS_FILES}
     ${ALGEBRA_TESTS_FILES}
