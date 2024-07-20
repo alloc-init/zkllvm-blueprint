@@ -64,10 +64,10 @@ target_link_libraries(${CMAKE_WORKSPACE_NAME}_${CURRENT_PROJECT_NAME} INTERFACE
         crypto3::random
         crypto3::zk
 
-        marshalling::core
-        marshalling::crypto3_algebra
-        marshalling::crypto3_multiprecision
-        marshalling::crypto3_zk)
+        crypto3::marshalling-core
+        crypto3::marshalling-algebra
+        crypto3::marshalling-multiprecision
+        crypto3::marshalling-zk)
 
 cm_deploy(TARGETS ${CMAKE_WORKSPACE_NAME}_${CURRENT_PROJECT_NAME}
         INCLUDE include
