@@ -13,9 +13,17 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
 find_package(Boost REQUIRED COMPONENTS random unit_test_framework)
 
-cm_test_link_libraries(blueprint
-                       crypto3::all
-                       ${Boost_LIBRARIES})
+cm_test_link_libraries(${CMAKE_WORKSPACE_NAME}_${CURRENT_PROJECT_NAME}
+
+        ${CMAKE_WORKSPACE_NAME}::algebra
+        ${CMAKE_WORKSPACE_NAME}::hash
+        ${CMAKE_WORKSPACE_NAME}::math
+        ${CMAKE_WORKSPACE_NAME}::multiprecision
+        ${CMAKE_WORKSPACE_NAME}::random
+        ${CMAKE_WORKSPACE_NAME}::zk
+        crypto3::marshalling-zk
+
+        ${Boost_LIBRARIES})
 
 option(ZK_PLACEHOLDER_PROFILING "Build with placeholder profiling" FALSE)
 option(ZK_PLACEHOLDER_DEBUG "Build with placeholder debug output" FALSE)
@@ -53,10 +61,10 @@ macro(define_blueprint_test test)
     cm_test(NAME ${full_test_name} SOURCES ${test}.cpp ARGS ${additional_args})
 
     target_include_directories(${full_test_name} PRIVATE
-                               "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-                               "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>"
+            "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+            "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>"
 
-                               ${Boost_INCLUDE_DIRS})
+            ${Boost_INCLUDE_DIRS})
 
     set_target_properties(${full_test_name} PROPERTIES CXX_STANDARD 17)
 
@@ -188,16 +196,16 @@ set(PLONK_TESTS_FILES
     )
 
 set(FIELDS_TESTS_FILES
-    "algebra/fields/r1cs/fp2"
-    "algebra/fields/r1cs/fp2_verification"
-    "algebra/fields/r1cs/fp3"
-    "algebra/fields/r1cs/fp3_verification"
-    "algebra/fields/r1cs/fp4"
-    "algebra/fields/r1cs/fp4_verification"
-    "algebra/fields/r1cs/fp6_2over3"
-    "algebra/fields/r1cs/fp6_2over3_verification"
-    #"algebra/fields/r1cs/exponentiation"
-    )
+        "algebra/fields/r1cs/fp2"
+        "algebra/fields/r1cs/fp2_verification"
+        "algebra/fields/r1cs/fp3"
+        "algebra/fields/r1cs/fp3_verification"
+        "algebra/fields/r1cs/fp4"
+        "algebra/fields/r1cs/fp4_verification"
+        "algebra/fields/r1cs/fp6_2over3"
+        "algebra/fields/r1cs/fp6_2over3_verification"
+        #"algebra/fields/r1cs/exponentiation"
+)
 
 set(ZKEVM_TESTS_FILES
     "zkevm/state_selector"
@@ -210,45 +218,45 @@ set(ZKEVM_TESTS_FILES
     )
 
 set(CURVES_TESTS_FILES
-    "algebra/curves/r1cs/montgomery"
-    "algebra/curves/r1cs/twisted_edwards"
-    "algebra/curves/r1cs/fixed_base_mul_zcash"
-    )
+        "algebra/curves/r1cs/montgomery"
+        "algebra/curves/r1cs/twisted_edwards"
+        "algebra/curves/r1cs/fixed_base_mul_zcash"
+)
 
 set(HASHES_TESTS_FILES
-    "hashes/r1cs/knapsack"
-    "hashes/r1cs/knapsack_verification"
-    "hashes/r1cs/sha256"
-    "hashes/r1cs/sha256_verification"
-    "hashes/r1cs/pedersen")
+        "hashes/r1cs/knapsack"
+        "hashes/r1cs/knapsack_verification"
+        "hashes/r1cs/sha256"
+        "hashes/r1cs/sha256_verification"
+        "hashes/r1cs/pedersen")
 
 set(PAIRING_TESTS_FILES
-    "algebra/pairing/weierstrass/r1cs/miller_loop"
-    "algebra/pairing/weierstrass/r1cs/precomputation")
+        "algebra/pairing/weierstrass/r1cs/miller_loop"
+        "algebra/pairing/weierstrass/r1cs/precomputation")
 
 set(ROUTING_TESTS_FILES
-    "routing_algorithms/routing_algorithms"
-    "routing/r1cs/as_waksman"
-    "routing/r1cs/benes")
+        "routing_algorithms/routing_algorithms"
+        "routing/r1cs/as_waksman"
+        "routing/r1cs/benes")
 
 set(SCHEMES_TESTS_FILES
-    "verifiers/r1cs_ppzksnark"
-    "set_commitment_component")
+        "verifiers/r1cs_ppzksnark"
+        "set_commitment_component")
 
 set(MERKLE_TREE_TESTS_FILES
-    "merkle_tree_components")
+        "merkle_tree_components")
 
 set(VOTING_TESTS_FILES
-    "voting/r1cs/encrypted_input_voting")
+        "voting/r1cs/encrypted_input_voting")
 
 set(BASIC_COMPONENTS_TESTS_FILES
-    "basic_components"
-    "basic_components_r1cs_gg_ppzksnark")
+        "basic_components"
+        "basic_components_r1cs_gg_ppzksnark")
 
 SET(ALGEBRA_TESTS_FILES
-    ${FIELDS_TESTS_FILES}
-    ${CURVES_TESTS_FILES}
-    ${PAIRING_TESTS_FILES})
+        ${FIELDS_TESTS_FILES}
+        ${CURVES_TESTS_FILES}
+        ${PAIRING_TESTS_FILES})
 
 SET(ALL_TESTS_FILES
     ${COMMON_TEST_FILES}
