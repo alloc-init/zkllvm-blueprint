@@ -22,10 +22,6 @@ macro(cm_find_package NAME)
 endmacro()
 
 cm_project(blueprint WORKSPACE_NAME ${CMAKE_WORKSPACE_NAME} LANGUAGES C CXX)
-
-option(CMAKE_ENABLE_TESTS "Enable tests" FALSE) # used by CMTest module
-option(BUILD_EXAMPLES "Build examples" FALSE)
-
 if(NOT Boost_FOUND AND NOT CMAKE_CROSSCOMPILING)
     find_package(Boost REQUIRED COMPONENTS container random filesystem log log_setup program_options thread system)
 endif()
