@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.21.4)
 list(APPEND CMAKE_MODULE_PATH
         "${CMAKE_CURRENT_LIST_DIR}/cmake/modules/share/modules/cmake")
 
+find_package(CM)
 include(CMConfig)
 include(CMSetupVersion)
 include(CMTest)
@@ -60,10 +61,10 @@ target_link_libraries(${CMAKE_WORKSPACE_NAME}_${CURRENT_PROJECT_NAME} INTERFACE
         crypto3::random
         crypto3::zk
 
-        crypto3::marshalling-core
-        crypto3::marshalling-algebra
-        crypto3::marshalling-multiprecision
-        crypto3::marshalling-zk)
+        marshalling::core
+        marshalling::crypto3_algebra
+        marshalling::crypto3_multiprecision
+        marshalling::crypto3_zk)
 
 cm_deploy(TARGETS ${CMAKE_WORKSPACE_NAME}_${CURRENT_PROJECT_NAME}
         INCLUDE include
