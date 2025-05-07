@@ -2,10 +2,12 @@ cmake_minimum_required(VERSION 3.21.4)
 
 project(zkllvm-blueprint)
 
-find_package(CM)
+find_package(CM REQUIRED)
+
 include(CMConfig)
 include(CMSetupVersion)
 include(CMTest)
+include(CMDeploy)
 
 if(NOT CMAKE_WORKSPACE_NAME OR NOT ("${CMAKE_WORKSPACE_NAME}" STREQUAL "crypto3"))
     cm_workspace(crypto3)
